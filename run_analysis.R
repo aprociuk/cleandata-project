@@ -43,11 +43,13 @@ run_analysis <- function() {
     testlbls[,1] <<- rowlbls[testlbls[,1]]
     
     
-    ## Merge activity vector with dataset
-    trnset_tot <<- cbind(trnlbls,trnsbj,trndat_prune)
-    trnset_tot_frame <<- data.frame(training=trnset_tot)
-    testset_tot <<- cbind(testlbls,testsbj,testdat_prune)
-    testset_tot_frame <<- data.frame(test=testset_tot)
+    ## Merge activity and subject vectors with dataset
+    trnset_tot <<- cbind(trnsbj,trnlbls,trndat_prune)
+    ## trnset_tot_frame <<- data.frame(training=trnset_tot)
+    testset_tot <<- cbind(testsbj,testlbls,testdat_prune)
+    ## testset_tot_frame <<- data.frame(test=testset_tot)
     
+    ## Merge test an training datasets
+    allsets_tot_frame <<- rbind(trnset_tot,testset_tot)    
     
 }
