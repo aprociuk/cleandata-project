@@ -1,5 +1,8 @@
 run_analysis <- function() {
 
+    ## load package that includes melt
+    library(reshape2)
+    
     ## Read in column (feature) names
     actnmsfct <<- read.table("UCI\ HAR\ Dataset/features.txt")
     actnms <<- as.matrix(actnmsfct)
@@ -50,6 +53,16 @@ run_analysis <- function() {
     ## testset_tot_frame <<- data.frame(test=testset_tot)
     
     ## Merge test an training datasets
-    allsets_tot_frame <<- rbind(trnset_tot,testset_tot)    
+    allsets_tot_frame <<- rbind(trnset_tot,testset_tot)  
+    
+    ## Create tidy data set
+    allsets_melt <<- melt(allsets_tot_frame, 
+                          id=names(allsets_tot_frame)[1:2], 
+                          measure.vars=
+                            names(allsets_tot_frame)[3:length(names(allsets_tot_frame))]
+                         )
+    allsets_tidy <<- dcast(allsets_melt,
+                           subject + activity ~ variable,
+                           mean)
     
 }
