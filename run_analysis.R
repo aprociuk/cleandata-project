@@ -1,6 +1,5 @@
 run_analysis <- function() {
-    ## First do trainting dataset
-    
+
     ## Read in column (feature) names
     actnmsfct <<- read.table("UCI\ HAR\ Dataset/features.txt")
     actnms <<- as.matrix(actnmsfct)
@@ -14,21 +13,26 @@ run_analysis <- function() {
     trndat <<- read.table("UCI\ HAR\ Dataset/train/X_train.txt",
                           col.names=actnms[,2])
     
+    
     ## Prune above data to include only means and 
     ## standard deviations
     keepvc <<- c(grep("mean",actnms[,2],ignore.case=TRUE),
                  grep("std",actnms[,2],ignore.case=TRUE))
     trndat_prune <<- trndat[,keepvc]
     
-    ## Load activity vector
+    ## Load activity and subject vectors
     trnlbls <<- read.table("UCI\ HAR\ Dataset/train/y_train.txt",
                            col.names="activity")
+    trnsbj <<- read.table("UCI\ HAR\ Dataset/train/subject_train.txt",
+                           col.names="subject")
+    
+    
     
     ## Relabel activity vector
     trnlbls[,1] <<- rowlbls[trnlbls[,1]]
     
     ## Merge activity vector with dataset
-    trnset_tot <<- cbind(trnlbls,trndat_prune)
+    trnset_tot <<- cbind(trnlbls,trnsbj,trndat_prune)
     trnset_tot_frame <<- data.frame(training=trnset_tot)
 
 }
