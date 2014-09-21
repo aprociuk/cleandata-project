@@ -1,0 +1,16 @@
+Codebook of variables:
+======================
+
+subject -- number (from 1 to 30) identifying an individual test subject.
+
+activity -- a descriptor of the given activity that the person was 
+            supposed to carry out.  
+
+remaining fields -- means (mean) and standard deviations (std) of 
+            various orientations, and motion parameters (e.g. 
+            Acc = acceleration, Jerk = sudden motion)
+
+See description files in the dataset downloadable from:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+and,
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
